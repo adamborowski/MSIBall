@@ -1,0 +1,33 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerController.cs">
+    <Files>
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\GameConsts.cs" Line="15" Column="2" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\EsfCoreTest.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Gui\GuiHolderScript.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\3rd party\Singleton.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerModel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerOccMouseCharacterModel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Gui\PlayerInfoPanel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerPadMockCharacterModel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\FeelBall.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\FeelBallsManager.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerCharacterModel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerCharacterModelFactory.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Gui\TestsPanel.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Profiling\GameProfiler.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\Profiling\GameProfilerDateTime.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\GameUtils.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\ErfInitialization.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="..\..\KAROL_LEWANDOWSKI_125662\Source\ErfDemonstration\Assets\Erf\Scripts\KeyboardInput.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerController.cs" Line="23" Column="31" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="D:\Studia\MGR\SourceCode\ErfDemonstration\Assets\Erf\Scripts\Player\PlayerPadMockCharacterModel.cs" line="70" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
