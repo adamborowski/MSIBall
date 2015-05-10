@@ -20,6 +20,7 @@ public class ObstacleManager : MonoBehaviour {
 	public Transform obstaclePrefab;
 	
 	float zSpread;
+	float destroyMargin=2;//how far from player passed obscatles will be destroyed
 	float lastZPos;
 
 	private Queue<Transform> objectQueue;
@@ -33,6 +34,16 @@ public class ObstacleManager : MonoBehaviour {
 
 
 	void Update () {
+		
+		while(objectQueue.Count>0){
+		if(objectQueue.Peek().position.z+destroyMargin<playerTransform.position.z){
+				Destroy(objectQueue.Dequeue().gameObject);
+			}
+			else{
+				break;
+			}
+		}
+
 
 		if(playerTransform.position.z - lastZPos >= zSpread){
 			float lanePos = Random.Range(0, 3);
