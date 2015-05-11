@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class PlayerController : MonoBehaviour
 {
-	
+		public ScoreController scoreController;
 		public float speed;
 		public static float initialZSpeed = 1;
 		public float zSpeed = initialZSpeed;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 		{
 				if (other.gameObject.name == "Obstacle(Clone)") {
 						zSpeed = initialZSpeed;
+						scoreController.collisionDetected (other);
 				}
 		}
 	
