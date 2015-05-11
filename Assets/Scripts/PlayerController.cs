@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 		void updateSpeed ()
 		{
 				zSpeed *= zAcc;
+				
 		}
 
 		void OnCollisionEnter (Collision other)

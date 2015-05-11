@@ -15,13 +15,13 @@ namespace AssemblyCSharp
 {
 		public class ScoreController: MonoBehaviour
 		{
-				public Transform scoreText;
+				public PlayerController player;
 				public Text scoreTextField;
 
 				public void Start ()
 				{
-						scoreTextField = scoreText.GetComponent<Text> ();
-						updateInfo ();
+						
+						//updateInfo ();
 				}
 
 				private int numCollisions = 0;
@@ -30,12 +30,17 @@ namespace AssemblyCSharp
 				{
 						numCollisions++;
 						
-						updateInfo ();
+						//updateInfo ();
 				}
 
 				private void updateInfo ()
 				{
-						scoreTextField.text = "Collisions: " + numCollisions;
+						scoreTextField.text = "Collisions: " + numCollisions + "\nBoost: " + (player.zSpeed-1).ToString("0.00");
+				}
+
+				public void Update ()
+				{
+						updateInfo ();
 				}
 		}
 }
