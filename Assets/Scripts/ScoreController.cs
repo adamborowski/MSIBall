@@ -10,38 +10,108 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
+using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
-		public class ScoreController: MonoBehaviour
-		{
-				public PlayerController player;
-				public Text scoreTextField;
+    public class PointBuffer
+    {
+        private class Point
+        {
+            public int score;
+            public DateTime time;
 
-				public void Start ()
-				{
-						
-						//updateInfo ();
-				}
+            public Point(int score, DateTime time)
+            {
+                this.score = score;
+                this.time = time;
+            }
+        }
+        public PointBuffer(int stepTime, int windowTime)
+        {
+            queue = new Queue<Point>();
+            timer = new Timer(stepTime);
+            timer.Start();
+            timer.Elapsed += OnTimedEvent;
+            this.windowTime = windowTime;
+            
+        }
+        
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            var currentTime = DateTime.Now;
+            var firstTime = currentTime.AddMilliseconds(-windowTime);
+            while (queue.Count>0 && queue.Peek().time<firstTime)
+            {
+                queue.Dequeue();
+            }
+            var points = 0;
+            foreach (var point in queue)
+            {
+                points += point.score;
+            }
+            movingScore = points;
+        }
+        
+        public void AddPoint(int score)
+        {
+            queue.Enqueue(new Point(score,DateTime.Now));
+        }
+        
+        public void Stop()
+        {
+            timer.Stop();
+            
+        }
+        
+        //privates
+        private Timer timer;
+        private Queue<Point> queue;
+        public int windowTime;
+        public int movingScore = 0;
 
-				private int numCollisions = 0;
 
-				public void collisionDetected (Collision collision)
-				{
-						numCollisions++;
-						
-						//updateInfo ();
-				}
+    }
 
-				private void updateInfo ()
-				{
-						scoreTextField.text = "Collisions: " + numCollisions + "\nBoost: " + (player.zSpeed-1).ToString("0.00");
-				}
+    public class ScoreController: MonoBehaviour
+    {
+        public PlayerController player;
+        public Text scoreTextField;
+        public PointBuffer buffer;
 
-				public void Update ()
-				{
-						updateInfo ();
-				}
-		}
+        public void Start()
+        {
+            buffer = new PointBuffer(1000,10000);
+            updateInfo ();
+
+        }
+
+        public void OnDestroy()
+        {
+            buffer.Stop();
+        }
+
+        private int numCollisions = 0;
+
+        public void collisionDetected(Collision collision)
+        {
+            numCollisions++;
+            buffer.AddPoint(1);
+        }
+
+        private void updateInfo()
+        {
+            scoreTextField.text = "Collisions: " + numCollisions
+                + "\nLast " + (buffer.windowTime / 1000).ToString("0") + "s: " + buffer.movingScore
+                + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
+                + "";
+        }
+
+        public void Update()
+        {
+            updateInfo();
+        }
+    }
 }
 
