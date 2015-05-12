@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using AssemblyCSharp;
-
+/**
+ * Trasa jest generowana automatycznie,
+ * gracz w trybie emocjonalnym ma zmienną kulkę (sterowalność i rozmiar) w zależności od /collisions in last 10 seconds/
+ * a w trybie bez emocji może wybrać sterowalność i rozmiar kulki
+ * 
+ */
 public class PlayerController : MonoBehaviour
 {
 		public ScoreController scoreController;
