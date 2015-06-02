@@ -56,7 +56,7 @@ namespace AssemblyCSharp
         
         public void AddPoint(int score)
         {
-            queue.Enqueue(new Point(score,DateTime.Now));
+            queue.Enqueue(new Point(score, DateTime.Now));
         }
         
         public void Stop()
@@ -82,8 +82,8 @@ namespace AssemblyCSharp
 
         public void Start()
         {
-            buffer = new PointBuffer(1000,10000);
-            updateInfo ();
+            buffer = new PointBuffer(1000, 10000);
+            updateInfo();
 
         }
 
@@ -102,10 +102,14 @@ namespace AssemblyCSharp
 
         private void updateInfo()
         {
-            scoreTextField.text = "Collisions: " + numCollisions
-                + "\nLast " + (buffer.windowTime / 1000).ToString("0") + "s: " + buffer.movingScore
-                + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
-                + "";
+            if (PlayerController.gameSettings!=null)
+            {
+                scoreTextField.text = "Collisions: " + numCollisions
+                    + "\nLast " + (buffer.windowTime / 1000).ToString("0") + "s: " + buffer.movingScore
+                    + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
+                    + "\nDifficulty: " + (PlayerController.gameSettings.gameDifficulty.ToString())
+                    + "";
+            }
         }
 
         public void Update()

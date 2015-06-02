@@ -11,13 +11,14 @@ public class ErfInitialization : MonoBehaviour {
     }
 
     void Awake() { 
+    //    Debug.LogWarning("Ustawienia: "+MainMenu.gameSettings.gameMode.ToString()+" / "+MainMenu.gameSettings.gameDifficulty.ToString());
         ErfLogger.SetLoggingEnabled (true);
         ErfLogger.SetAllStreamsToLoggingFile (@"d://debug.txt");
-        Debug.Log ("Initializing ERF for ErfDemo, trying to load "+Directory.GetCurrentDirectory()+"\\ExternalComponentLibrary.dll");
+        Debug.Log ("Initializing ERF for ErfDemo, trying to load "+Directory.GetCurrentDirectory()+"\\MSIBallErf.dll");
 
         ErfContext context = ErfContext.GetInstance ();
-        try {
-            ExternalComponentLibrary library = ErfContext.GetInstance ().LoadComponentLibrary ("ExternalComponentLibrary.dll");
+        /*try {
+            ExternalComponentLibrary library = ErfContext.GetInstance ().LoadComponentLibrary("ErfCore.dll");
             if (library == null) { 
                 Debug.LogError("Could not load ExternalComponentLibrary library");
                 return;
@@ -26,6 +27,7 @@ public class ErfInitialization : MonoBehaviour {
         {
             Debug.Log (e.Message);
         }
+        */
         
         testMSIBallErf ();
         
@@ -45,18 +47,20 @@ public class ErfInitialization : MonoBehaviour {
             Debug.Log (e.Message);
             return;
         }
+        //init:
         ExternalExpert msiBallEmotionModel = ErfContext.GetInstance ().FindExpert ("MSIBallEmotionModel");
         CharacterModel playerModel = new CharacterModel ();
         playerModel.RegisterExpert (msiBallEmotionModel);
-        
+
+
+        //collision:
         EecEvent timeElapsedEvent = new EecEvent ((int)GameEvent.STD_TIME_ELAPSED);
         timeElapsedEvent.AddValue ("NO_OF_COLLISIONS", Variant.Create (2));
         timeElapsedEvent.AddValue ("CURRENT_SPEED", Variant.Create (7.0f));
-        
         playerModel.HandleEvent (timeElapsedEvent);
-        
+        //odpowiedz z erf
         float fear = playerModel.GetEmotionVector ().GetValue (OccEmotions.FEAR).AsFloat();
-        
+        //rzeliczenie na poziom trudnosci
         if(fear > 0.0f)
             Debug.Log ("FIRST I WAS AFRAID, I WAS PETRIFIED!");
         else
