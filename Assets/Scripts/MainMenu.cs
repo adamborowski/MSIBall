@@ -85,6 +85,7 @@ public class MainMenu : MonoBehaviour
             Application.Quit();
         }
 
+
         if (DragWindow)
             GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
 

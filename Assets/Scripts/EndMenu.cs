@@ -15,13 +15,6 @@ public class EndMenu : MonoBehaviour {
     private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
 
 
-    public int score;
-
-    private void Start()
-    {
-        score = 0;
-    }
-    
     private void OnGUI()
     {
         
@@ -48,7 +41,7 @@ public class EndMenu : MonoBehaviour {
         {
             Application.LoadLevel("MainMenuScene");
         }
-        
+        GUILayout.Space(10);
         if (DragWindow)
             GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
         

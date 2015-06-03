@@ -51,7 +51,7 @@ public class ErfInitialization : MonoBehaviour {
 
         //odpowiedz z erf
         float fear = playerModel.GetEmotionVector ().GetValue (OccEmotions.FEAR).AsFloat();
-        //rzeliczenie na poziom trudnosci
+        //przeliczenie na poziom trudnosci
         if(fear > 0.0f)
             Debug.Log ("FIRST I WAS AFRAID, I WAS PETRIFIED!");
         else
@@ -59,8 +59,4 @@ public class ErfInitialization : MonoBehaviour {
         
     }
 
-    // Update is called once per frame
-    void Update () {
-        
-    }
 }

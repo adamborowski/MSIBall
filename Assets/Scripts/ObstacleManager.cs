@@ -6,7 +6,6 @@ using AssemblyCSharp;
 public class ObstacleManager : MonoBehaviour
 {
     public ScoreController scoreController;
-    public int obstaclePerGround;
     public int minHeight;
     public int maxHeight;
     public int minWidth;
@@ -18,7 +17,7 @@ public class ObstacleManager : MonoBehaviour
     public Transform playerTransform;
     public Transform obstaclePrefab;
     float zSpread;
-    float destroyMargin = 2;//how far from player passed obscatles will be destroyed
+    float destroyMargin = 2;//jak daleko od kuli gracza usuwać obiekty
     float lastZPos;
     private Queue<Transform> objectQueue;
     ObstacleGenerator generator;
@@ -34,15 +33,15 @@ public class ObstacleManager : MonoBehaviour
     void Update()
     {
         
-        while (objectQueue.Count>0)
+        while (objectQueue.Count>0)//przeglądaj przeszkody w celu znalezienia tych do usunięcia. kolekcja jest posortowana.
         {
             if (objectQueue.Peek().position.z + destroyMargin < playerTransform.position.z)
             {
                 Destroy(objectQueue.Dequeue().gameObject);
-                //tylko minięcie jednej z dwóch ścianek powoduje avoidance
+                //tylko minięcie jednej z dwóch ścianek powoduje avoidance (nie chcemy zgłaszać minięcie lewej i minięcie prawej przeszkody, tylko minięcie dziury)
                 if (objectQueue.Peek().localPosition.x < 0)
                 {
-                    scoreController.collisionAvoided();
+                    scoreController.collisionAvoided();//dodaj punkty za usuwaną przeszkodę
                 }
 
 
@@ -52,8 +51,8 @@ public class ObstacleManager : MonoBehaviour
             }
         }
 
-
-        if (playerTransform.position.z - lastZPos >= zSpread)
+        //generowanie nowej przeszkody
+        if (playerTransform.position.z - lastZPos >= zSpread)//czy już generować następną przeszkodę?
         {
             ObstacleGenerator.ObstacleParams op = generator.generateParams();
             //z pos
@@ -70,7 +69,7 @@ public class ObstacleManager : MonoBehaviour
             sc2.x = op.end - op.gapEnd;
             sc2.y = op.height;
             right.localScale = sc2;
-
+            //przeskalowanie znormalizowanych parametrów przeszkody
             left.position += new Vector3(-4.5f + left.localScale.x / 2, 0);
             right.position += new Vector3(-4.5f + right.localScale.x / 2, 0);
             objectQueue.Enqueue(left);

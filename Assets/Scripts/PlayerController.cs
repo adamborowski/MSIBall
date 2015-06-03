@@ -22,14 +22,14 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     public static float distanceTraveled;
     public static GameSettings gameSettings;
-    private CharacterModel playerModel;
-    private DateTime lastReportTime;
-    private int interval = 1700;
-    private float minFear = 5, maxFear = 20;
+    private CharacterModel playerModel;//nasz link do ERF
+    private DateTime lastReportTime;//miernik zmiany poziomu trudności dla trybu z emocjami
+    private int interval = 1700;//co ile sprawdzać zmianę poziomu trudności dla trybu z emocjami
+    private float minFear = 5, maxFear = 20;//wstępne wskaźniki mapowania strachu na poziom trudności
 
 
-    public AudioClip impact;
-    AudioSource audio;
+
+    AudioSource audio;//odnośnik do dźwięku kolizji
     
 
     void Start()
@@ -50,19 +50,19 @@ public class PlayerController : MonoBehaviour
 
         if (MainMenu.gameSettings == null)
         {
-            //initial screen był Game a nei Menu
+            //jeśli w debug initial screen był Game a nie Menu
             MainMenu.gameSettings = new GameSettings();
             MainMenu.gameSettings.gameMode = GameMode.EMOTIONAL;
 
         }
         gameSettings = MainMenu.gameSettings;
 
-        if (gameSettings.gameMode == GameMode.FIXED)
+        if (gameSettings.gameMode == GameMode.FIXED)//ustaw poziom trudności
         {
             setDifficultyEnum(gameSettings.gameDifficulty, false);
         } else
         {
-            setDifficultyEnum(GameDifficulty.HARD, false);
+            setDifficultyEnum(GameDifficulty.HARD, false);//ustaw na początek na poziom trudny w trybie rozpoznawania emocji
         }
     }
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     void updateSpeed()
     {
-        zSpeed *= zAcc;
+        zSpeed *= zAcc;//lekko przyśpieszamy
                 
     }
 
@@ -106,17 +106,16 @@ public class PlayerController : MonoBehaviour
     void setDifficulty(float dif)
     {
         difficulty = dif;
-        targetScale = dif;
-        //transform.localScale=Vector3.Lerp(transform.localScale, new Vector3(dif, dif, dif),3) ;
+        targetScale = dif;//robimy transition do targetScale
     }
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.name == "Obstacle(Clone)")
+        if (other.gameObject.name == "Obstacle(Clone)")//tylko kolizje z przeszkodami a nie np ścianą
         {
             zSpeed = initialZSpeed;
             scoreController.collisionDetected(other);
-            rb.AddExplosionForce(140 * zSpeed * difficulty, other.contacts [0].point, 0);
+            rb.AddExplosionForce(140 * zSpeed * difficulty, other.contacts [0].point, 0);//odbij się od przeszkody
             audio.Play();
         }
     }
@@ -124,17 +123,17 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float fac;
-
+        //transition scale
         float curScale = transform.localScale.x;
         float newScale = 0.05f * (targetScale - curScale) + curScale;
-
         transform.localScale = new Vector3(newScale, newScale, newScale);
+        //
         if (gameSettings.gameMode == GameMode.EMOTIONAL)
         {
             //erf
             DateTime now = DateTime.Now;
            
-            if ((now-lastReportTime).TotalMilliseconds >= interval)
+            if ((now-lastReportTime).TotalMilliseconds >= interval)//czy należy rozpatrzeć zmianę emocji?
             {
                 lastReportTime = now;
                 //tutaj wysyłamy emocję
@@ -172,13 +171,13 @@ public class PlayerController : MonoBehaviour
             //nie zmieniamy poziomu trudności
         }
 
-        if (Input.GetKeyDown("escape"))
+        if (Input.GetKeyDown("escape"))//wychodzimy do menu?
         {
             Application.LoadLevel("MainMenuScene");
         }
 
 
-
+        //obsługa poruszania kulą przez użytkownika
         float moveHorizontal = Input.GetAxis("Horizontal");
 
         float moveVertical = Input.GetAxis("Vertical");

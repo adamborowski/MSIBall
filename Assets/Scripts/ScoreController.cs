@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AssemblyCSharp
 {
+    /*
+     * PointBuffer pozwala nam odpowiedzieć na pytanie: "Ile kolizji w ostatnich 10 sekundach"
+     */
     public class PointBuffer
     {
 
@@ -72,7 +75,7 @@ namespace AssemblyCSharp
         public Text scoreTextField;
         public PointBuffer buffer;
         public static int totalScore = 0;
-        int nextPoints = 1;
+        int nextPoints = 1;//przyrostowa punktacja za kolejne udane ominięcie przeszkody
 
         private float timer;
 
@@ -107,24 +110,24 @@ namespace AssemblyCSharp
 
         public void collisionDetected(Collision collision)
         {
-            nextPoints = 1;
+            nextPoints = 1;//resetujemy kumulowany przyrost punktów
             numCollisions++;
-            totalScore -= (int)Math.Ceiling(totalScore*0.1f / getDifficultyFactor());
+            totalScore -= (int)Math.Ceiling(totalScore*0.1f / getDifficultyFactor());//algorytm obliczenia kary
             if (totalScore < 0)
                 totalScore = 0;
-            buffer.AddPoint(1);
+            buffer.AddPoint(1);//dodaj kolizję do sumatora kroczącego
         }
 
         public void collisionAvoided()
         {
             Debug.LogWarning("avoided: "+getDifficultyFactor()+ " / "+ nextPoints);
-            totalScore += getDifficultyFactor() * nextPoints;
-            nextPoints++;
-            Debug.Log(nextPoints);
+            totalScore += getDifficultyFactor() * nextPoints;//algorytm przyznania nagrody wprost proporcjonalny do poziomu trudności
+            nextPoints++;//za kolejne ominięcie przeszkody przyzna więcej punktów
         }
 
         private void updateInfo()
         {
+            //wyświetl informacje o stanie rozgrywki
             timer -= Time.deltaTime;
             if (timer <=0.0f)
                 Application.LoadLevel("EndScene");
