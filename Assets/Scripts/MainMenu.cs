@@ -10,7 +10,17 @@ public class MainMenu : MonoBehaviour
     private string clicked = "";
     public static GameSettings gameSettings;
     private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
-    
+
+
+    /*
+     * Menu ktrore pojawia sie przed rozpoczeciem rozgrywki
+     * 
+     * sklada sie z kilku prostych labeli
+     * do wybory poziom trydnosci oraz tryb gry
+     * ustawienia przekazywane sa do GameSettings po zatwierdzeniu
+     * 
+     */
+
     private void Start()
     {
         gameSettings = new GameSettings();

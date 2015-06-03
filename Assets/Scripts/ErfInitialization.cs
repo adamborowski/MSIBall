@@ -10,25 +10,14 @@ public class ErfInitialization : MonoBehaviour {
         
     }
 
+    // zaladowanie biblioteki erf do kontekstu
     void Awake() { 
-    //    Debug.LogWarning("Ustawienia: "+MainMenu.gameSettings.gameMode.ToString()+" / "+MainMenu.gameSettings.gameDifficulty.ToString());
+
+        // Debug.LogWarning("Ustawienia: "+MainMenu.gameSettings.gameMode.ToString()+" / "+MainMenu.gameSettings.gameDifficulty.ToString());
         ErfLogger.SetLoggingEnabled (true);
         ErfLogger.SetAllStreamsToLoggingFile (@"d://debug.txt");
         Debug.Log ("Initializing ERF for ErfDemo, trying to load "+Directory.GetCurrentDirectory()+"\\MSIBallErf.dll");
-
         ErfContext context = ErfContext.GetInstance ();
-        /*try {
-            ExternalComponentLibrary library = ErfContext.GetInstance ().LoadComponentLibrary("ErfCore.dll");
-            if (library == null) { 
-                Debug.LogError("Could not load ExternalComponentLibrary library");
-                return;
-            }
-        } catch (Exception e)
-        {
-            Debug.Log (e.Message);
-        }
-        */
-        
         testMSIBallErf ();
         
         Debug.Log ("Library successfully loaded");
@@ -36,6 +25,7 @@ public class ErfInitialization : MonoBehaviour {
     
     void testMSIBallErf()
     {
+
         try {
             ExternalComponentLibrary library = ErfContext.GetInstance ().LoadComponentLibrary ("MSIBallErf.dll");
             if (library == null) { 
@@ -58,6 +48,7 @@ public class ErfInitialization : MonoBehaviour {
         timeElapsedEvent.AddValue ("NO_OF_COLLISIONS", Variant.Create (2));
         timeElapsedEvent.AddValue ("CURRENT_SPEED", Variant.Create (7.0f));
         playerModel.HandleEvent (timeElapsedEvent);
+
         //odpowiedz z erf
         float fear = playerModel.GetEmotionVector ().GetValue (OccEmotions.FEAR).AsFloat();
         //rzeliczenie na poziom trudnosci

@@ -180,14 +180,11 @@ public class PlayerController : MonoBehaviour
 
 
         float moveHorizontal = Input.GetAxis("Horizontal");
-        //float moveHorizontal = 0.0f;
 
         float moveVertical = Input.GetAxis("Vertical");
-        //float moveVertical = 0.0f;
         
         Vector3 movement = new Vector3(moveHorizontal / difficulty, 0.0f, zSpeed);
         rb.AddForce(movement * speed);
-        //rb.MovePosition ();
         distanceTraveled = transform.localPosition.z;
         updateSpeed();
     }

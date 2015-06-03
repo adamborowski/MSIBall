@@ -69,10 +69,6 @@ public class ObstacleManager : MonoBehaviour
             sc2.x = op.end - op.gapEnd;
             sc2.y=op.height;
             right.localScale = sc2;
-//            float lanePos = Random.Range(0, 3);
-//            lanePos = (lanePos - 1) * 1.5f;
-//            var a = Instantiate(obstaclePrefab, new Vector3(lanePos, 0.5f, playerTransform.position.z + zDistance + drawOffset), Quaternion.identity);
-//            objectQueue.Enqueue((Transform)a);
 
             left.position += new Vector3(-4.5f + left.localScale.x / 2, 0);
             right.position += new Vector3(-4.5f + right.localScale.x / 2, 0);
