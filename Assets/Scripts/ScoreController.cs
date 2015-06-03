@@ -71,8 +71,10 @@ namespace AssemblyCSharp
         public PlayerController player;
         public Text scoreTextField;
         public PointBuffer buffer;
-        int totalScore = 0;
+        public int totalScore = 0;
         int nextPoints = 1;
+
+        public float timer;
 
         private int getDifficultyFactor()
         {
@@ -91,6 +93,7 @@ namespace AssemblyCSharp
         public void Start()
         {
             buffer = new PointBuffer(1000, 10000);
+            timer = 5.0f;
             updateInfo();
 
         }
@@ -122,13 +125,19 @@ namespace AssemblyCSharp
 
         private void updateInfo()
         {
+            timer -= Time.deltaTime;
+            if (timer <=0.0f)
+                Application.LoadLevel("EndScene");
+
             if (PlayerController.gameSettings != null)
             {
-                scoreTextField.text = "Collisions: " + numCollisions
+                scoreTextField.text = ""
+                    + "Collisions: " + numCollisions
                     + "\nLast " + (buffer.windowTime / 1000).ToString("0") + "s: " + buffer.movingScore
                     + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
                     + "\nDifficulty: " + (PlayerController.gameSettings.gameDifficulty.ToString())
                     + "\nScore: " + totalScore.ToString("0")
+                    + "\nTime: " + timer.ToString()
                     + "";
 
             }
