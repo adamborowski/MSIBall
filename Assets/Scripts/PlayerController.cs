@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public static GameSettings gameSettings;
     private CharacterModel playerModel;
     private DateTime lastReportTime;
-    private int interval = 1000;
+    private int interval = 1700;
     private float minFear = 5, maxFear = 20;
 
 
@@ -73,16 +73,23 @@ public class PlayerController : MonoBehaviour
             scoreController.GetComponent<AudioSource>().Play();
         }
         gameSettings.gameDifficulty = difficulty;
+        var m = GetComponent<Renderer>().material;
+        var light = 0.8f;
+        var dark = 0.2f;
+        var alpha = 0.86f;
         switch (difficulty)
         {
             case GameDifficulty.EASY:
                 setDifficulty(0.5f);
+                m.color = new Color(dark, light, dark, alpha);
                 break;
             case GameDifficulty.MEDIUM:
                 setDifficulty(0.7f);
+                m.color = new Color(dark, dark, light, alpha);
                 break;
             case GameDifficulty.HARD:
                 setDifficulty(1.1f);
+                m.color = new Color(light, dark, dark, alpha);
                 break;
         }
     }

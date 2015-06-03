@@ -79,6 +79,23 @@ namespace AssemblyCSharp
         public PlayerController player;
         public Text scoreTextField;
         public PointBuffer buffer;
+        int totalScore = 0;
+        int nextPoints = 1;
+        //int collisionPenalty = 10;
+
+        private int getDifficultyFactor()
+        {
+            switch (PlayerController.gameSettings.gameDifficulty)
+            {
+                case GameDifficulty.EASY:
+                    return 1;
+                case GameDifficulty.MEDIUM:
+                    return 2;
+                case GameDifficulty.HARD:
+                    return 3;
+            }
+            return 0;
+        }
 
         public void Start()
         {
@@ -96,19 +113,33 @@ namespace AssemblyCSharp
 
         public void collisionDetected(Collision collision)
         {
+            nextPoints = 1;
             numCollisions++;
+            totalScore -= (int)Math.Ceiling(totalScore*0.1f / getDifficultyFactor());
+            if (totalScore < 0)
+                totalScore = 0;
             buffer.AddPoint(1);
+        }
+
+        public void collisionAvoided()
+        {
+            Debug.LogWarning("avoided: "+getDifficultyFactor()+ " / "+ nextPoints);
+            totalScore += getDifficultyFactor() * nextPoints;
+            nextPoints++;
+            Debug.Log(nextPoints);
         }
 
         private void updateInfo()
         {
-            if (PlayerController.gameSettings!=null)
+            if (PlayerController.gameSettings != null)
             {
                 scoreTextField.text = "Collisions: " + numCollisions
                     + "\nLast " + (buffer.windowTime / 1000).ToString("0") + "s: " + buffer.movingScore
                     + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
                     + "\nDifficulty: " + (PlayerController.gameSettings.gameDifficulty.ToString())
+                    + "\nScore: " + totalScore.ToString("0")
                     + "";
+
             }
         }
 

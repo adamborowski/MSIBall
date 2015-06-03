@@ -5,7 +5,7 @@ using AssemblyCSharp;
 
 public class ObstacleManager : MonoBehaviour
 {
-
+    public ScoreController scoreController;
     public int obstaclePerGround;
     public int minHeight;
     public int maxHeight;
@@ -39,6 +39,12 @@ public class ObstacleManager : MonoBehaviour
             if (objectQueue.Peek().position.z + destroyMargin < playerTransform.position.z)
             {
                 Destroy(objectQueue.Dequeue().gameObject);
+                //tylko minięcie jednej z dwóch ścianek powoduje avoidance
+                if(objectQueue.Peek().localPosition.x<0){
+                    scoreController.collisionAvoided();
+                }
+
+
             } else
             {
                 break;
