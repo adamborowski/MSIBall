@@ -19,7 +19,7 @@ public class EndMenu : MonoBehaviour {
 
     private void Start()
     {
-        score = ;
+        score = 0;
     }
     
     private void OnGUI()
@@ -41,12 +41,12 @@ public class EndMenu : MonoBehaviour {
     private void menuFunc(int id)
     {
         
-        GUILayout.Label("Times Up!\nScore: ");
+        GUILayout.Label("Times Up!\nScore: "+ScoreController.totalScore.ToString("0"));
         
         GUILayout.Space(10);
-        if (GUILayout.Button("Exit"))
+        if (GUILayout.Button("Main Menu"))
         {
-            Application.Quit();
+            Application.LoadLevel("MainMenuScene");
         }
         
         if (DragWindow)

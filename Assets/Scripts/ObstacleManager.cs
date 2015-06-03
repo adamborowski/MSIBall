@@ -40,7 +40,8 @@ public class ObstacleManager : MonoBehaviour
             {
                 Destroy(objectQueue.Dequeue().gameObject);
                 //tylko minięcie jednej z dwóch ścianek powoduje avoidance
-                if(objectQueue.Peek().localPosition.x<0){
+                if (objectQueue.Peek().localPosition.x < 0)
+                {
                     scoreController.collisionAvoided();
                 }
 
@@ -61,13 +62,13 @@ public class ObstacleManager : MonoBehaviour
             Transform left = Instantiate(obstaclePrefab, new Vector3(0, op.height / 2, zPos), Quaternion.identity) as Transform;
             var sc1 = left.localScale;
             sc1.x = op.gapStart - op.start;
-            sc1.y=op.height;
+            sc1.y = op.height;
             left.localScale = sc1;
             //second lane
             Transform right = Instantiate(obstaclePrefab, new Vector3(op.gapEnd, op.height / 2, zPos), Quaternion.identity) as Transform;
             var sc2 = right.localScale;
             sc2.x = op.end - op.gapEnd;
-            sc2.y=op.height;
+            sc2.y = op.height;
             right.localScale = sc2;
 
             left.position += new Vector3(-4.5f + left.localScale.x / 2, 0);

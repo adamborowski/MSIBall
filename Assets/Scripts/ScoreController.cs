@@ -71,10 +71,10 @@ namespace AssemblyCSharp
         public PlayerController player;
         public Text scoreTextField;
         public PointBuffer buffer;
-        public int totalScore = 0;
+        public static int totalScore = 0;
         int nextPoints = 1;
 
-        public float timer;
+        private float timer;
 
         private int getDifficultyFactor()
         {
@@ -93,7 +93,7 @@ namespace AssemblyCSharp
         public void Start()
         {
             buffer = new PointBuffer(1000, 10000);
-            timer = 5.0f;
+            timer = 60.0f;
             updateInfo();
 
         }
@@ -137,7 +137,7 @@ namespace AssemblyCSharp
                     + "\nBoost: " + (player.zSpeed - 1).ToString("0.00")
                     + "\nDifficulty: " + (PlayerController.gameSettings.gameDifficulty.ToString())
                     + "\nScore: " + totalScore.ToString("0")
-                    + "\nTime: " + timer.ToString()
+                    + "\nTime: " + timer.ToString("0")+"s"
                     + "";
 
             }

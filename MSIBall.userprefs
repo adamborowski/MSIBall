@@ -1,18 +1,6 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\ObstacleManager.cs">
-    <Files>
-      <File FileName="Assets\Scripts\MainMenu.cs" Line="11" Column="44" />
-      <File FileName="Assets\Scripts\ObstacleGenerator.cs" Line="26" Column="10" />
-      <File FileName="Assets\Scripts\ObstacleManager.cs" Line="69" Column="40" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="94" Column="10" />
-      <File FileName="Assets\Scripts\ScoreController.cs" Line="124" Column="10" />
-      <File FileName="Assets\Scripts\CameraController.cs" Line="15" Column="20" />
-      <File FileName="Assets\Scripts\ErfInitialization.cs" Line="45" Column="9" />
-      <File FileName="Assets\Scripts\GameSettings.cs" Line="14" Column="56" />
-      <File FileName="Assets\Scripts\GroundManager.cs" Line="33" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
